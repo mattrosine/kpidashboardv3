@@ -15,7 +15,7 @@ const FunnelChart = () => {
   
   const options = {
     chart: {
-      type: 'bar',
+      type: 'bar' as 'bar',
       height: 500,
       toolbar: {
         show: false,
@@ -46,7 +46,7 @@ const FunnelChart = () => {
     },
     dataLabels: {
       enabled: true,
-      formatter: function (val, opts) {
+      formatter: function (val: number, opts: { dataPointIndex: number }) {
         // Use the original data values for display
         const originalValues = [
           originalData.screens,
@@ -77,7 +77,7 @@ const FunnelChart = () => {
       },
       position: 'center',
       offsetX: 0, // Ensure no horizontal offset
-      textAnchor: 'middle', // Center text horizontally
+      textAnchor: 'middle' as 'middle', // Center text horizontally
       distributed: true, // Ensure each label gets its own styling
       align: 'center', // Horizontal alignment
       verticalAlign: 'middle', // Vertical alignment
