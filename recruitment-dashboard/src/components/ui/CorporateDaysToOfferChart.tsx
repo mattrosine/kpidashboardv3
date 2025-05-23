@@ -4,9 +4,11 @@ import { ArrowDownIcon, ArrowUpIcon } from "lucide-react";
 import { PolarRadiusAxis, RadialBar, RadialBarChart } from "recharts";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { useCorporateData } from "@/lib/useCorporateData";
+import { useTheme } from "next-themes"; // Import useTheme
 
 export default function CorporateDaysToOfferChart() {
   const { data } = useCorporateData();
+  const { theme } = useTheme(); // Get current theme
   const daysToOffer = data.daysToOffer;
   
   // Determine color based on the value range
@@ -26,7 +28,7 @@ export default function CorporateDaysToOfferChart() {
     {
       name: "Background",
       value: 100,
-      fill: "#000000"
+      fill: theme === 'dark' ? '#FFFFFF' : '#000000' // Change fill based on theme
     },
     {
       name: "Days to Offer",

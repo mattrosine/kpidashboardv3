@@ -18,7 +18,11 @@ const StaffingHiresCard = dynamic(() => import("@/components/ui/StaffingHiresCar
 const CPUInterviewsCard = dynamic(() => import("@/components/ui/CPUInterviewsCard"), { ssr: false });
 const CPUHiresCard = dynamic(() => import("@/components/ui/CPUHiresCard"), { ssr: false });
 const CorporateDaysToOfferChart = dynamic(() => import("@/components/ui/CorporateDaysToOfferChart"), { ssr: false });
-const CorporateSourcingChannelsChart = dynamic(() => import("@/components/ui/CorporateSourcingChannelsChart"), { ssr: false }); // Added import
+const CorporateSourcingChannelsChart = dynamic(() => import("@/components/ui/CorporateSourcingChannelsChart"), { ssr: false });
+const CPUOpenLateAssignmentsChart = dynamic(() => import("@/components/ui/CPUOpenLateAssignmentsChart"), { ssr: false });
+const ChangesToHeadcountChart = dynamic(() => import("@/components/ui/ChangesToHeadcountChart"), { ssr: false });
+const CPUStartsOffersChart = dynamic(() => import("@/components/ui/CPUStartsOffersChart"), { ssr: false });
+const OffersAndTerminationsChart = dynamic(() => import("@/components/ui/OffersAndTerminationsChart"), { ssr: false });
 
 export default function Home() {
   const SidebarContent = () => (
@@ -180,7 +184,7 @@ export default function Home() {
           {/* First column - Corporate Days to Offer and Corporate Sourcing Channels */}
           <div className="col-span-1 grid grid-rows-2 gap-6"> {/* Modified to grid and added gap */}
             <CorporateDaysToOfferChart />
-            <CorporateSourcingChannelsChart /> {/* Added new chart */}
+            <CorporateSourcingChannelsChart /> 
           </div>
           
           {/* Second column - Pipeline Funnel directly under Avg TTF */}
@@ -204,6 +208,13 @@ export default function Home() {
               <CPUHiresCard />
             </div>
           </div>
+        </div>
+
+        {/* New row for CPU charts */}
+        <div className="mt-6 lg:mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <CPUOpenLateAssignmentsChart />
+          <ChangesToHeadcountChart />
+          <OffersAndTerminationsChart /> {/* Replaced CPUStartsOffersChart with OffersAndTerminationsChart */} 
         </div>
       </main>
     </div>
