@@ -13,7 +13,7 @@ const FULL_RANGE = `${SHEET_NAME}!${DATA_RANGE}`;
 export function useChangesToHeadcountData() {
   const [data, setData] = useState<HeadcountData[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<Error | null>(null);
 
   useEffect(() => {
     const fetchHeadcountData = async () => {
@@ -71,7 +71,8 @@ export function useChangesToHeadcountData() {
         // Fallback to placeholder data on error
         const months = ["January", "February", "March", "April", "May", "June"];
         setData(months.map(month => ({ month, count: 0 })));
-        setError(err instanceof Error ? err.message : 'An unknown error occurred');
+        // Set error as an Error object
+        setError(err instanceof Error ? err : new Error('An unknown error occurred'));
 
       } finally {
         setLoading(false);
