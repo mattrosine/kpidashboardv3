@@ -21,7 +21,7 @@ export function ChartContainer({
   ...props
 }: ChartContainerProps) {
   // Set CSS variables for chart colors
-  const style = {};
+  const style: { [key: string]: string } = {};
   Object.entries(config).forEach(([key, value]) => {
     style[`--color-${key}`] = value.color;
   });
