@@ -13,7 +13,7 @@ const FULL_RANGE = `${SHEET_NAME}!${DATA_RANGE}`;
 export function useChangesToHeadcountData() {
   const [data, setData] = useState<HeadcountData[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<Error | null>(null);
+  const [error, setError] = useState<Error | null>(null); // Ensure type is Error | null
 
   useEffect(() => {
     const fetchHeadcountData = async () => {
@@ -65,15 +65,17 @@ export function useChangesToHeadcountData() {
           });
           setData(formattedData);
         }
-      } catch (err) {
-        // console.error("Error fetching headcount data:", err);
-        // setError(err instanceof Error ? err.message : 'Failed to fetch headcount data');
-        // Fallback to placeholder data on error
+      } catch (e) { // Changed variable name for clarity
         const months = ["January", "February", "March", "April", "May", "June"];
         setData(months.map(month => ({ month, count: 0 })));
-        // Set error as an Error object
-        setError(err instanceof Error ? err : new Error('An unknown error occurred'));
-
+        // Refined error handling to preserve string messages if 'e' is a string
+        if (e instanceof Error) {
+          setError(e);
+        } else if (typeof e === 'string') {
+          setError(new Error(e)); // Wrap string error message in an Error object
+        } else {
+          setError(new Error('An unknown error occurred while fetching headcount data'));
+        }
       } finally {
         setLoading(false);
       }
